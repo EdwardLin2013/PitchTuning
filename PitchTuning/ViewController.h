@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PitchDetectionEngine.h"
 
 @interface ViewController : UIViewController
 
 @end
+

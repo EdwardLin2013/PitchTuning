@@ -9,7 +9,9 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-
+{
+    PitchDetectionEngine *Engine;
+}
 @end
 
 @implementation ViewController
@@ -17,7 +19,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+    /*
+     *  Start Pitch Detection Engine (Singleton), which includes
+     *  1) Setup the Mic
+     *  2) Analysis whatever sound comes from the Mic
+     *  3) ? Store the Pitch Record? 
+     */
+    Engine = [PitchDetectionEngine sharedEngine];
 }
 
 - (void)didReceiveMemoryWarning

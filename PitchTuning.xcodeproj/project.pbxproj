@@ -14,13 +14,18 @@
 		2B19C32A184447DA00AFE1C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B19C329184447DA00AFE1C0 /* main.m */; };
 		2B19C32E184447DA00AFE1C0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B19C32D184447DA00AFE1C0 /* AppDelegate.m */; };
 		2B19C331184447DA00AFE1C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B19C32F184447DA00AFE1C0 /* Main.storyboard */; };
-		2B19C334184447DA00AFE1C0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B19C333184447DA00AFE1C0 /* ViewController.m */; };
+		2B19C334184447DA00AFE1C0 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2B19C333184447DA00AFE1C0 /* ViewController.mm */; };
 		2B19C336184447DA00AFE1C0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B19C335184447DA00AFE1C0 /* Images.xcassets */; };
 		2B19C33D184447DA00AFE1C0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B19C33C184447DA00AFE1C0 /* XCTest.framework */; };
 		2B19C33E184447DA00AFE1C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B19C31D184447DA00AFE1C0 /* Foundation.framework */; };
 		2B19C33F184447DA00AFE1C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B19C321184447DA00AFE1C0 /* UIKit.framework */; };
 		2B19C347184447DA00AFE1C0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2B19C345184447DA00AFE1C0 /* InfoPlist.strings */; };
 		2B19C349184447DA00AFE1C0 /* PitchTuningTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B19C348184447DA00AFE1C0 /* PitchTuningTests.m */; };
+		2B1A6D161845BA970073E38D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B1A6D151845BA970073E38D /* AVFoundation.framework */; };
+		2B1A6D181845BA9E0073E38D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B1A6D171845BA9E0073E38D /* AudioToolbox.framework */; };
+		2B1A6D1A1845BAA40073E38D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B1A6D191845BAA40073E38D /* Accelerate.framework */; };
+		2B1A6D1C1845BAF50073E38D /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B1A6D1B1845BAF50073E38D /* CoreAudio.framework */; };
+		2B245AF318450E7500C79C2D /* PitchDetectionEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2B245AF218450E7500C79C2D /* PitchDetectionEngine.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,13 +51,20 @@
 		2B19C32D184447DA00AFE1C0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2B19C330184447DA00AFE1C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2B19C332184447DA00AFE1C0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2B19C333184447DA00AFE1C0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2B19C333184447DA00AFE1C0 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		2B19C335184447DA00AFE1C0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2B19C33B184447DA00AFE1C0 /* PitchTuningTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PitchTuningTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B19C33C184447DA00AFE1C0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		2B19C344184447DA00AFE1C0 /* PitchTuningTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PitchTuningTests-Info.plist"; sourceTree = "<group>"; };
 		2B19C346184447DA00AFE1C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2B19C348184447DA00AFE1C0 /* PitchTuningTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PitchTuningTests.m; sourceTree = "<group>"; };
+		2B1A6D131845BA8D0073E38D /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		2B1A6D151845BA970073E38D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		2B1A6D171845BA9E0073E38D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		2B1A6D191845BAA40073E38D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		2B1A6D1B1845BAF50073E38D /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		2B245AF118450E7500C79C2D /* PitchDetectionEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchDetectionEngine.h; path = ../PitchDetectionEngine.h; sourceTree = "<group>"; };
+		2B245AF218450E7500C79C2D /* PitchDetectionEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PitchDetectionEngine.mm; path = ../PitchDetectionEngine.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +72,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B1A6D1C1845BAF50073E38D /* CoreAudio.framework in Frameworks */,
+				2B1A6D1A1845BAA40073E38D /* Accelerate.framework in Frameworks */,
+				2B1A6D181845BA9E0073E38D /* AudioToolbox.framework in Frameworks */,
+				2B1A6D161845BA970073E38D /* AVFoundation.framework in Frameworks */,
 				2B19C320184447DA00AFE1C0 /* CoreGraphics.framework in Frameworks */,
 				2B19C322184447DA00AFE1C0 /* UIKit.framework in Frameworks */,
 				2B19C31E184447DA00AFE1C0 /* Foundation.framework in Frameworks */,
@@ -101,6 +117,11 @@
 		2B19C31C184447DA00AFE1C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2B1A6D1B1845BAF50073E38D /* CoreAudio.framework */,
+				2B1A6D191845BAA40073E38D /* Accelerate.framework */,
+				2B1A6D171845BA9E0073E38D /* AudioToolbox.framework */,
+				2B1A6D151845BA970073E38D /* AVFoundation.framework */,
+				2B1A6D131845BA8D0073E38D /* AudioUnit.framework */,
 				2B19C31D184447DA00AFE1C0 /* Foundation.framework */,
 				2B19C31F184447DA00AFE1C0 /* CoreGraphics.framework */,
 				2B19C321184447DA00AFE1C0 /* UIKit.framework */,
@@ -112,11 +133,12 @@
 		2B19C323184447DA00AFE1C0 /* PitchTuning */ = {
 			isa = PBXGroup;
 			children = (
+				2B245AF418450E9E00C79C2D /* Engine */,
 				2B19C32C184447DA00AFE1C0 /* AppDelegate.h */,
 				2B19C32D184447DA00AFE1C0 /* AppDelegate.m */,
 				2B19C32F184447DA00AFE1C0 /* Main.storyboard */,
 				2B19C332184447DA00AFE1C0 /* ViewController.h */,
-				2B19C333184447DA00AFE1C0 /* ViewController.m */,
+				2B19C333184447DA00AFE1C0 /* ViewController.mm */,
 				2B19C335184447DA00AFE1C0 /* Images.xcassets */,
 				2B19C324184447DA00AFE1C0 /* Supporting Files */,
 			);
@@ -150,6 +172,15 @@
 				2B19C345184447DA00AFE1C0 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2B245AF418450E9E00C79C2D /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				2B245AF118450E7500C79C2D /* PitchDetectionEngine.h */,
+				2B245AF218450E7500C79C2D /* PitchDetectionEngine.mm */,
+			);
+			name = Engine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +230,13 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Edward;
 				TargetAttributes = {
+					2B19C319184447DA00AFE1C0 = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
+					};
 					2B19C33A184447DA00AFE1C0 = {
 						TestTargetID = 2B19C319184447DA00AFE1C0;
 					};
@@ -249,8 +287,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B19C334184447DA00AFE1C0 /* ViewController.m in Sources */,
+				2B19C334184447DA00AFE1C0 /* ViewController.mm in Sources */,
 				2B19C32E184447DA00AFE1C0 /* AppDelegate.m in Sources */,
+				2B245AF318450E7500C79C2D /* PitchDetectionEngine.mm in Sources */,
 				2B19C32A184447DA00AFE1C0 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,6 +420,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PitchTuning/PitchTuning-Prefix.pch";
 				INFOPLIST_FILE = "PitchTuning/PitchTuning-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -394,6 +434,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PitchTuning/PitchTuning-Prefix.pch";
 				INFOPLIST_FILE = "PitchTuning/PitchTuning-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -460,6 +501,7 @@
 				2B19C34E184447DA00AFE1C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2B19C34F184447DA00AFE1C0 /* Build configuration list for PBXNativeTarget "PitchTuningTests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +510,7 @@
 				2B19C351184447DA00AFE1C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
