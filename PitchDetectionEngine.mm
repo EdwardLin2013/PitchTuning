@@ -5,8 +5,6 @@
 //  Created by Edward on 27/11/13.
 //  Copyright (c) 2013 Edward. All rights reserved.
 //
-
-// Force to Commit to Github
 #import "PitchDetectionEngine.h"
 
 @implementation PitchDetectionEngine
@@ -29,6 +27,9 @@
     
     [self initializeAudioSession];              // Initialize Audio Session
     [self createAUProcessingGraph];             // Setup the microphone
+    
+    [self printPitchDetectionEngine];
+    
     [self initializeAndStartProcessingGraph];   // Turn on the microphone
     
     return self;
@@ -39,10 +40,11 @@
 {
     NSLog(@"initializeAudioSession is called!");
     
-	NSError	*err = nil;
+    NSError	*err = nil;
 	AVAudioSession *session = [AVAudioSession sharedInstance];
 	
-    sampleRate = 44100;
+    sampleRate = 44100;             // Fix this sample rate, as limitation of human hearing is ~20,000Hz
+    percentageOfOverlap = 0;        // % of frame overlap
     
     [session setPreferredSampleRate:sampleRate error:&err];
 	[session setCategory:AVAudioSessionCategoryPlayAndRecord error:&err];
@@ -87,7 +89,12 @@
 /* Setup our FFT */
 - (void)realFFTSetup
 {
-	UInt32 maxFrames = 2048;                                    // Base MUST be 2!
+    UInt32 maxFrames = 2048;                                    // Base MUST be 2!
+//    UInt32 maxFrames = 4096;                                    // Base MUST be 2!
+//    UInt32 maxFrames = 8192;                                    // Base MUST be 2!
+//    UInt32 maxFrames = 16384;                                    // Base MUST be 2!
+//    UInt32 maxFrames = 32768;                                    // Base MUST be 2!
+    
 	dataBuffer = (void*)malloc(maxFrames * sizeof(SInt16));
 	outputBuffer = (float*)malloc(maxFrames *sizeof(float));
 
@@ -100,7 +107,7 @@
 	FFT.realp = (float *)malloc(nOver2 * sizeof(float));
 	FFT.imagp = (float *)malloc(nOver2 * sizeof(float));
     Cepstrum.realp = (float *)malloc(nOver2 * sizeof(float));
-	Cepstrum.imagp = (float *)malloc(nOver2 * sizeof(float));
+    Cepstrum.imagp = (float *)malloc(nOver2 * sizeof(float));
 
     // For each FFT, the maximum sample point is 2^(log2n - 1), and at each stage,
     // N point FFT is the combined result of N/Radix FFTs!
@@ -218,6 +225,7 @@ OSStatus AudioAnalysisCallback (void                        *inRefCon,
 	SInt16 index = THIS->index;
     int bufferCapacity = THIS->bufferCapacity;
     float sampleRate = THIS->sampleRate;
+    int percentageOfOverlap = THIS->percentageOfOverlap;
 	
 	AudioUnit rioUnit = THIS->ioUnit;
 	OSStatus renderErr;
@@ -228,15 +236,22 @@ OSStatus AudioAnalysisCallback (void                        *inRefCon,
     int bin = -1;
     
     /*------------Performance Analysis-----------------*/
-    double startTime, endTime, period, frequency;
+    double startTime, endTime, runningTime, frequency;
+    int midiNum;
     float curAMP;
+    NSString *pitch;
 
+    /*--------------Overlap Mechanism--------------*/
+    int remain = 0;
+    UInt32 start=0, sizeOfOverlap=0;
+    
     // Obtain sampled data from microphone
 	renderErr = AudioUnitRender(rioUnit, ioActionFlags, inTimeStamp, bus1, inNumberFrames, THIS->bufferList);
 	if (renderErr < 0)
 		return renderErr;
 	
 	// Fill the buffer with our sampled data. If we fill our buffer, run the fft.
+    // index is always smaller
 	int read = bufferCapacity - index;
 	if (read > inNumberFrames)
     {
@@ -249,52 +264,40 @@ OSStatus AudioAnalysisCallback (void                        *inRefCon,
 		// perform the FFT.
 		memcpy((SInt16 *)dataBuffer + index, THIS->bufferList->mBuffers[0].mData, read*sizeof(SInt16));
 		
-		// Reset the index.
-		THIS->index = 0;
-		
+        startTime = CACurrentMediaTime();
+        /*---------------------Method: Product of FFT and Cepstrum---------------------(Begin)*/
 		// We want to deal with only floating point values here.
 		ConvertInt16ToFloat(THIS, dataBuffer, outputBuffer, bufferCapacity);
 
-        /*---------------------Method 1: FFT Only---------------------(Begin)*/
-        startTime = CACurrentMediaTime();
-		/**
-		 Look at the real signal as an interleaved complex vector by casting it.
-		 Then call the transformation function vDSP_ctoz to get a split complex
-		 vector, which for a real signal, divides into an even-odd configuration.
-		 */
-		vDSP_ctoz((COMPLEX*)outputBuffer, 2, &FFT, 1, nOver2);
+        /*
+         * Look at the real signal as an interleaved complex vector by casting it.
+         * Then call the transformation function vDSP_ctoz to get a split complex
+         * vector, which for a real signal, divides into an even-odd configuration.
+         */
+        vDSP_ctoz((COMPLEX*)outputBuffer, 2, &FFT, 1, nOver2);
 		
-		// Carry out a Forward FFT transform.
-		vDSP_fft_zrip(fftSetup, &FFT, 1, log2n, FFT_FORWARD);
-        
-        // Find the frequency with the largest amplitude
+        // Carry out a Forward FFT transform.
+        vDSP_fft_zrip(fftSetup, &FFT, 1, log2n, FFT_FORWARD);
+
         dominantAMP = 0;
-		bin = -1;
+        bin = -1;
         for(i=0; i<nOver2; i++)
         {
-            curAMP = MagnitudeSquared(FFT.realp[i], FFT.imagp[i]);
-            if(curAMP > dominantAMP)
+            curAMP = FFT.realp[i]*FFT.realp[i] + FFT.imagp[i]*FFT.imagp[i] ;
+            if (curAMP > dominantAMP)
             {
                 dominantAMP = curAMP;
                 bin = i;
             }
         }
-     	memset(outputBuffer, 0, n*sizeof(SInt16));
-        
-        endTime = CACurrentMediaTime();
-        period = endTime-startTime;
         frequency = bin*(sampleRate/bufferCapacity);
-		NSLog(@"Method 1: Time used for FFT is %f seconds\n", period);
-        NSLog(@"Method 1: Dominant frequency: %f   bin: %d \n", frequency, bin);
-        NSLog(@"Method 1: Pitch: %@", [THIS midiToString:[THIS freqToMIDI:frequency]]);
-		/*---------------------Method 1: FFT Only---------------------(End)*/
-        
-        /*---------------------Method 2: Product of FFT and Cepstrum---------------------(Begin)*/
+        midiNum = [THIS freqToMIDI:frequency];
+        pitch = [THIS midiToString:midiNum];
+        NSLog(@"%f %d %d %@", frequency, bin, midiNum, pitch);
+
         float* absFFTFloat = (float*)malloc(nOver2*sizeof(float));
         float* absCepstrumFloat = (float*)malloc(nOver2*sizeof(float));
-        float* logABSFFTFloat = (float*)malloc(bufferCapacity*sizeof(float));
-        
-        startTime = CACurrentMediaTime();
+        float* logABSFFTFloat = (float*)malloc(n*sizeof(float));
         
         // absFFTFloat = abs(FFTFloat);
         vDSP_zvabs(&FFT, 1, absFFTFloat, 1, nOver2);
@@ -320,43 +323,86 @@ OSStatus AudioAnalysisCallback (void                        *inRefCon,
         vDSP_zvabs(&Cepstrum, 1, absCepstrumFloat, 1, nOver2);
         
         dominantAMP = 0;
-		bin = -1;
-		for(i=0; i<nOver2; i++)
+        bin = -1;
+        for(i=0; i<nOver2; i++)
         {
-			float curAMP = sqrt(absFFTFloat[i]) * sqrt(absCepstrumFloat[i]);
-			if (curAMP > dominantAMP)
+            curAMP = sqrt(absFFTFloat[i]) * sqrt(absCepstrumFloat[i]);
+            if (curAMP > dominantAMP)
             {
-				dominantAMP = curAMP;
-				bin = i;
-			}
-		}
+                dominantAMP = curAMP;
+                bin = i;
+            }
+        }
+
         endTime = CACurrentMediaTime();
-        period = endTime-startTime;
+        runningTime = endTime-startTime;
         frequency = bin*(sampleRate/bufferCapacity);
-		NSLog(@"Method 2: Time used for FFT is %f seconds\n", period);
-        NSLog(@"Method 2: Dominant frequency: %f   bin: %d \n", frequency, bin);
-        NSLog(@"Method 2: Pitch: %@", [THIS midiToString:[THIS freqToMIDI:frequency]]);
-        /*---------------------Method 2: Product of FFT and Cepstrum---------------------(Begin)*/
+        midiNum = [THIS freqToMIDI:frequency];
+        pitch = [THIS midiToString:midiNum];
+        
+        NSLog(@"%f %f %d %d %@", runningTime, frequency, bin, midiNum, pitch);
+        /*---------------------Method: Product of FFT and Cepstrum---------------------(END)*/
+        
+        // free all temporary storage and clear outputBuffer;
+        free(absFFTFloat);
+        free(absCepstrumFloat);
+        free(logABSFFTFloat);
+        memset(outputBuffer, 0, n*sizeof(SInt16));
+
+       
+        // Overlap Mechanism
+        if (percentageOfOverlap>0 && percentageOfOverlap<100)
+        {
+            start = (int)((float)bufferCapacity * (float)(1 - (float)percentageOfOverlap/100));
+            sizeOfOverlap = bufferCapacity - start;
+            
+            void* tmpDataBuffer = (void*)malloc(n*sizeof(SInt16));
+            memcpy((SInt16 *)tmpDataBuffer, (SInt16 *)dataBuffer + start, sizeOfOverlap*sizeof(SInt16));
+            memcpy((SInt16 *)dataBuffer, (SInt16 *)tmpDataBuffer, sizeOfOverlap*sizeof(SInt16));
+            free(tmpDataBuffer);
+         
+            THIS->index = sizeOfOverlap;
+        }
+        else // No Overlap
+            THIS->index = 0;
         
         // Should not discard the remaining samples, store the remaining data back to dataBuffer!
-        int remain = inNumberFrames-read;
+        remain = inNumberFrames-read;
         if(remain > 0)
         {
-            memcpy((SInt16 *)dataBuffer + index, (SInt16 *)THIS->bufferList->mBuffers[0].mData + read, remain*sizeof(SInt16));
-            THIS->index += remain;
+            UInt32 afterAddRemain = THIS->index + remain;
+            if(afterAddRemain<bufferCapacity)
+            {
+                memcpy((SInt16 *)dataBuffer, (SInt16 *)THIS->bufferList->mBuffers[0].mData + read, remain*sizeof(SInt16));
+                THIS->index += remain;
+            }
+            else // really need to discard some old samples, so that new samples can be process
+            {
+                NSLog(@"THIS->index = %zu", THIS->index);
+                start = THIS->index - (bufferCapacity - remain);
+                sizeOfOverlap = THIS->index - start;
+                
+                void* tmpDataBuffer = (void*)malloc(bufferCapacity * sizeof(SInt16));
+                memcpy((SInt16 *)tmpDataBuffer, (SInt16 *)dataBuffer + start, sizeOfOverlap*sizeof(SInt16));
+                memcpy((SInt16 *)dataBuffer, (SInt16 *)tmpDataBuffer, sizeOfOverlap*sizeof(SInt16));
+                free(tmpDataBuffer);
+                THIS->index = sizeOfOverlap;
+                
+                memcpy((SInt16 *)dataBuffer + THIS->index, (SInt16 *)THIS->bufferList->mBuffers[0].mData + read, remain*sizeof(SInt16));
+                
+                THIS->index += remain;
+                
+                NSLog(@"THIS->index Should equal to bufferCapacity, check  %zu:%d", THIS->index, bufferCapacity);
+            }
         }
-	}
+
+    }
 	
-	return noErr;
+    return noErr;
 }
 /*----------------------------------Audio Analysis Function-----------------------------------(End)*/
 
 #pragma mark Utility
-float MagnitudeSquared(float x, float y)
-{
-	return ((x*x) + (y*y));
-}
-
 // ConvertInt16ToFloat(THIS, dataBuffer, outputBuffer, bufferCapacity);
 void ConvertInt16ToFloat(PitchDetectionEngine* THIS, void *buf, float *outputBuf, size_t capacity)
 {
@@ -379,20 +425,23 @@ void ConvertInt16ToFloat(PitchDetectionEngine* THIS, void *buf, float *outputBuf
 	UInt32 inSize = capacity*sizeof(SInt16);        // 4096
 	UInt32 outSize = capacity*sizeof(float);        // 8192
     
-    NSLog(@"inSize = %u", (unsigned int)inSize);
-    NSLog(@"outSize = %u", (unsigned int)outSize);
-    
 	err = AudioConverterNew(&inFormat, &outFormat, &converter);
 	err = AudioConverterConvertBuffer(converter, inSize, buf, &outSize, outputBuf);
 }
 
 - (int)freqToMIDI:(float)frequency
 {
-    return 12*log2f(frequency/440) + 69;
+    if (frequency <=0)
+        return -1;
+    else
+        return 12*log2f(frequency/440) + 69;
 }
 
 - (NSString*)midiToString:(int)midiNote
 {
+    if (midiNote<=-1)
+        return @"NIL";
+    
     NSArray *noteStrings = [[NSArray alloc] initWithObjects:@"C", @"C#", @"D", @"D#", @"E", @"F", @"F#", @"G", @"G#", @"A", @"A#", @"B", nil];
     NSString *retval = [noteStrings objectAtIndex:midiNote%12];
     

@@ -5,8 +5,6 @@
 //  Created by Edward on 27/11/13.
 //  Copyright (c) 2013 Edward. All rights reserved.
 //
-
-// Force to Commit to Github
 #import <Foundation/Foundation.h>
 #import <AudioUnit/AudioUnit.h>
 #import <AVFoundation/AVFoundation.h>
@@ -30,6 +28,9 @@
 	AudioBufferList* bufferList;                // Buffer for 1 frame, 1 frame = 1024samples
 	AudioStreamBasicDescription streamFormat;   // Sample Rate: 44100, bytes per sample: 2 bytes
 
+	float sampleRate;                           // default: 44100
+    int percentageOfOverlap;                    // in %, [0-100) Percentage of Frame overlap
+    
 	FFTSetup fftSetup;                          // vDSP_create_fftsetup(log2n, FF_RADIX2)
 	COMPLEX_SPLIT FFT;                          // Convert from outputBuffer to split complex vector
     COMPLEX_SPLIT Cepstrum;
@@ -41,8 +42,6 @@
                                                 // and find the pitch
 	size_t index;                               // Current buffer usage of dataBuffer
     size_t bufferCapacity;                      // default: 2048 (bytes) as 2 bytes per sample
-    
-	float sampleRate;                           // default: 44100
 }
 
 /* Setup the singleton Engine */
