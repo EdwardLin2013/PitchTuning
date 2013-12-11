@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playlist xmlns="http://xspf.org/ns/0/" xmlns:vlc="http://www.videolan.org/vlc/playlist/ns/0/" version="1">
+	<title>Playlist</title>
+	<trackList>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/A4.wav</location>
+			<duration>2020</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>0</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/G4%23.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>1</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/G4.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>2</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/F4%23.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>3</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/F4.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>4</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/E4.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>5</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/E4b.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>6</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/D4.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>7</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/C4%23.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>8</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/C4.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>9</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/B3.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>10</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/B3b.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>11</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/A3.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>12</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/G3%23.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>13</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/G3.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>14</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/F3%23.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>15</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/F3.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>16</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/E3.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>17</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/E3b.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>18</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/D3.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>19</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/C3%23.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>20</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/C3.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>21</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/B2.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>22</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/B2b.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>23</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/A2.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>24</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/G2%23.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>25</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/G2.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>26</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/F2%23.wav</location>
+			<duration>42004</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>27</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<location>file:///D:/Courses/2013_Sem3/50_500_Analysis_of_Algorithms/Project/Vocaloid_Sample/F2.wav</location>
+			<duration>2020</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>28</vlc:id>
+			</extension>
+		</track>
+	</trackList>
+	<extension application="http://www.videolan.org/vlc/playlist/0">
+			<vlc:item tid="0"/>
+			<vlc:item tid="1"/>
+			<vlc:item tid="2"/>
+			<vlc:item tid="3"/>
+			<vlc:item tid="4"/>
+			<vlc:item tid="5"/>
+			<vlc:item tid="6"/>
+			<vlc:item tid="7"/>
+			<vlc:item tid="8"/>
+			<vlc:item tid="9"/>
+			<vlc:item tid="10"/>
+			<vlc:item tid="11"/>
+			<vlc:item tid="12"/>
+			<vlc:item tid="13"/>
+			<vlc:item tid="14"/>
+			<vlc:item tid="15"/>
+			<vlc:item tid="16"/>
+			<vlc:item tid="17"/>
+			<vlc:item tid="18"/>
+			<vlc:item tid="19"/>
+			<vlc:item tid="20"/>
+			<vlc:item tid="21"/>
+			<vlc:item tid="22"/>
+			<vlc:item tid="23"/>
+			<vlc:item tid="24"/>
+			<vlc:item tid="25"/>
+			<vlc:item tid="26"/>
+			<vlc:item tid="27"/>
+			<vlc:item tid="28"/>
+	</extension>
+</playlist>
